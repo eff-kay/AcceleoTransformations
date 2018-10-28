@@ -42,7 +42,7 @@ public class Feature2T extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "feature2t" };
+    public static final String[] TEMPLATE_NAMES = { "main" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
