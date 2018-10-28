@@ -6,17 +6,31 @@
  * The documentation of the template feature2t.
  * @param anURNspec
  */]
-[template public feature2t(anURNspec : URNspec)]
+
+[query public getDecomposition(intEl : IntentionalElement) : String = if intEl.decompositionType.oclIsUndefined() then '' else intEl.decompositionType.toString()  endif /]
+
+
+[template public writeChildren(intElement : IntentionalElement, urnSpec : URNspec)]
+	[for (link : ElementLink | intElement.linksDest)]
+		[link.name/] [link.src.name/] [getDecomposition(link.src.oclAsType(IntentionalElement))/] 
+		{
+			[writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]
+		}
+	[/for]
+[/template]
+
+[template public main(anURNspec : URNspec)]
 [comment @main/]
 [file (anURNspec.name, false, 'UTF-8')]
-[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements)]
-[comment this is the root feature/]
-[if(intElement.linksSrc->isEmpty())]
-features [intElement.name/]{
-} 
-
-[/if]
-
-[/for]
+	[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements)]
+	[comment this is the root feature/]
+	[if(intElement.linksSrc->isEmpty())]
+	features [intElement.name/]{
+		[writeChildren(intElement, anURNspec)/]
+	} 
+	
+	[/if]
+	
+	[/for]
 [/file]
 [/template]

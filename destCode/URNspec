@@ -1,17 +1,57 @@
-features Root{
-} 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	features Root{
+				Optional349 FeatureA And {
+					
+				}
+				Mandatory37 FeatureC Or {
+							Decomposition45 FeatureC1 Xor {
+										Decomposition367 FeatureC11 And {
+											
+										}
+										Decomposition368 FeatureC12 And {
+											
+										}
+								
+							}
+							Decomposition46 FeatureC2 And {
+								
+							}
+					
+				}
+				Optional40 FeatureB Xor {
+							Decomposition43 FeatureB1 And {
+										Mandatory362 FeatureB11 And {
+											
+										}
+										Mandatory363 FeatureB12 And {
+											
+										}
+								
+							}
+							Decomposition44 FeatureB2 And {
+								
+							}
+					
+				}
+				Optional354 FeatureD And {
+							Optional365 FeatureD1 And {
+								
+							}
+					
+				}
+		
+	} 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
