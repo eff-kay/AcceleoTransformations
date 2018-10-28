@@ -1,0 +1,22 @@
+[comment encoding = UTF-8 /]
+[module feature2T('http:///fm.ecore', 'http:///grl.ecore', 'http:///urn.ecore')]
+
+
+[**
+ * The documentation of the template feature2t.
+ * @param anURNspec
+ */]
+[template public feature2t(anURNspec : URNspec)]
+[comment @main/]
+[file (anURNspec.name, false, 'UTF-8')]
+[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements)]
+[comment this is the root feature/]
+[if(intElement.linksSrc->isEmpty())]
+features [intElement.name/]{
+} 
+
+[/if]
+
+[/for]
+[/file]
+[/template]
