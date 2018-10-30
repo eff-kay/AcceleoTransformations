@@ -42,7 +42,7 @@ public class Goal2T extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "main" };
+    public static final String[] TEMPLATE_NAMES = { "model2text" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
