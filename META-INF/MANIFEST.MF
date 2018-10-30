@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true
-Export-Package: testAcceleo1.main
+Export-Package: testAcceleo1.main, testAcceleo1.goal
 Bundle-ClassPath: bin/,
  .
 

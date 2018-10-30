@@ -1,0 +1,38 @@
+[comment encoding = UTF-8 /]
+[module Goal2T('http:///fm.ecore', 'http:///grl.ecore', 'http:///urn.ecore', 'http:///urncore.ecore')]
+
+
+[query public getDecomposition(intEl : IntentionalElement) : String = if intEl.decompositionType.oclIsUndefined() then '' else intEl.decompositionType.toString()  endif /]
+[query public getIntentionalElement(node: IURNNode) : IntentionalElement = node.oclAsType(grl::IntentionalElementRef)._def.oclAsType(grl::IntentionalElement) /]
+[query public getBelief(node: IURNNode) : Belief = node.oclAsType(grl::Belief)/]
+[query public getBeliefName(belief: Belief) : String = belief.description /]
+
+
+[template public main(anURNspec : URNspec)]
+[comment @main /]
+[file (anURNspec.name+'1', false, 'UTF-8')]
+	[for (a :  Actor | anURNspec.grlspec.actors)]
+	[comment output actor name /]
+		actor [a.name/]{
+		[comment get all nodes of an actor /]
+		[for (cr : IURNContainerRef | a.contRefs)]
+			[for (node: IURNNode | cr.nodes)]
+				[if not(node.oclAsType(grl::IntentionalElementRef).oclIsInvalid())]
+					[getIntentionalElement(node).name/] {
+						[for (linkRef : IURNConnection | node.succ)]
+							[linkRef.oclAsType(grl::LinkRef).link.id/] [linkRef.oclAsType(grl::LinkRef).link.src.id/] -> [linkRef.oclAsType(grl::LinkRef).link.dest.id/]
+						[/for]
+					}
+				[/if]
+			[/for]
+			}
+
+		[/for]
+	[/for]
+
+
+[comment identify actors if any in the given URN spec and transform /]
+
+
+[/file]
+[/template]

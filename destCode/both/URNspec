@@ -1,0 +1,28 @@
+		actor ActorA{
+			SoftgoalA
+			GoalA1
+			GoalA2
+			TaskA1
+			TaskA2
+			TaskA3
+			ResourceA
+			invalid
+			FeatureA
+			}
+
+		actor ActorB{
+			SoftgoalB
+			GoalB
+			TaskB1
+			invalid
+			TaskB2
+			TaskB3
+			ResourceB
+			FeatureB
+			FeatureC
+			}
+
+
+
+
+
