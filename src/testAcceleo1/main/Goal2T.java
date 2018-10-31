@@ -1,4 +1,4 @@
-package testAcceleo1.goal;
+package testAcceleo1.main;
 /*******************************************************************************
  * Copyright (c) 2008, 2012 Obeo.
  * All rights reserved. This program and the accompanying materials
@@ -35,14 +35,14 @@ public class Goal2T extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/testAcceleo1/goal/Goal2T";
+    public static final String MODULE_FILE_NAME = "/testAcceleo1/main/Goal2T";
     
     /**
      * The name of the templates that are to be generated.
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "model2text" };
+    public static final String[] TEMPLATE_NAMES = { "Goal2Text" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).

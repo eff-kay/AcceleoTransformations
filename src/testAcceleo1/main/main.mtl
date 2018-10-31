@@ -1,0 +1,13 @@
+[comment encoding = UTF-8 /]
+[module main('http:///fm.ecore', 'http:///grl.ecore', 'http:///grl/kpimodel.ecore', 'http:///urn.ecore', 'http:///urncore.ecore')/]
+[import testAcceleo1::main::Goal2T/]
+[import testAcceleo1::main::feature2T/]
+
+
+[template public mainURNspec(aURNspec : URNspec)]
+	
+	[comment @main /]
+	[aURNspec.Goal2Text()/]
+	[aURNspec.Feature2Text()/]
+	
+[/template]

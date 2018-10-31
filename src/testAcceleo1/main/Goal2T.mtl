@@ -8,12 +8,11 @@
 [query public getBeliefName(belief: Belief) : String = belief.description /]
 
 
-[template public model2text(anURNspec : URNspec)
+[template public Goal2Text(anURNspec : URNspec)
 {
 	;
 }]
-[comment @main/]
-[file (anURNspec.name+'.goal', false, 'UTF-8')]
+[file ('goals', false, 'UTF-8')]
 [comment identify actors if any in the given URN spec and transform /]
 
 [for (a :  Actor | anURNspec.grlspec.actors)]
