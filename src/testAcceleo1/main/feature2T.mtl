@@ -7,30 +7,30 @@
  * @param anURNspec
  */]
 
-[query public getDecomposition(intEl : IntentionalElement) : String = if intEl.decompositionType.oclIsUndefined() then '' else intEl.decompositionType.toString()  endif /]
-
+[query public getDecomposition(el : IntentionalElement) : String = if el.decompositionType.toString().equalsIgnoreCase('And') then '' else el.decompositionType.toString().toUpper()  endif /]
+[query public getLinkType(linkName : String) : String = if linkName.equalsIgnoreCase('OptionalFMLink') then 'optional' else if linkName.equalsIgnoreCase('MandatoryFMLink') then 'mandatory' else '' endif endif /]
 
 [template public writeChildren(intElement : IntentionalElement, urnSpec : URNspec)]
 	[for (link : ElementLink | intElement.linksDest)]
-		[link.name/] [link.src.name/] [getDecomposition(link.src.oclAsType(IntentionalElement))/] 
-		{
+		[if (link.src.oclAsType(IntentionalElement).linksDest->isEmpty())]
+		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition() /]
+		[else]
+		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition()/] {
 			[writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]
 		}
+		[/if]
 	[/for]
 [/template]
 
-[template public main(anURNspec : URNspec)]
-[comment @main/]
-[file (anURNspec.name, false, 'UTF-8')]
-	[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements)]
+[template public Feature2Text(anURNspec : URNspec)]
+[file ('features', false, 'UTF-8')]
+	[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements->filter(fm::Feature) )]
 	[comment this is the root feature/]
 	[if(intElement.linksSrc->isEmpty())]
-	features [intElement.name/]{
+	feature [intElement.name/]{
 		[writeChildren(intElement, anURNspec)/]
-	} 
-	
+	}
 	[/if]
-	
 	[/for]
 [/file]
 [/template]

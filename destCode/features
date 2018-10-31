@@ -1,0 +1,19 @@
+	feature Root{
+				mandatory FeatureA 
+				mandatory FeatureC XOR {
+							 FeatureC1  {
+										mandatory FeatureC11 
+										optional FeatureC12 
+								
+							}
+							 FeatureC2 
+							 FeatureC3 
+					
+				}
+				optional FeatureB OR {
+							 FeatureB1 
+							 FeatureB2 
+					
+				}
+		
+	}
