@@ -25,24 +25,24 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
- * Entry point of the 'Feature2t' generation module.
+ * Entry point of the 'Main' generation module.
  *
  * @generated
  */
-public class Feature2t extends AbstractAcceleoGenerator {
+public class Main extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/org/ca/mcgill/ecse/assignment2/main/feature2t";
+    public static final String MODULE_FILE_NAME = "/org/ca/mcgill/ecse/assignment2/main/main";
     
     /**
      * The name of the templates that are to be generated.
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "feature2t" };
+    public static final String[] TEMPLATE_NAMES = { "mainURNspec" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
@@ -65,7 +65,7 @@ public class Feature2t extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public Feature2t() {
+    public Main() {
         // Empty implementation
     }
 
@@ -85,7 +85,7 @@ public class Feature2t extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public Feature2t(URI modelURI, File targetFolder,
+    public Main(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -106,7 +106,7 @@ public class Feature2t extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public Feature2t(EObject model, File targetFolder,
+    public Main(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -141,7 +141,7 @@ public class Feature2t extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                Feature2t generator = new Feature2t(modelURI, folder, arguments);
+                Main generator = new Main(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
@@ -349,8 +349,14 @@ public class Feature2t extends AbstractAcceleoGenerator {
         if (!isInWorkspace(grl.kpimodel.KpimodelPackage.class)) {
             resourceSet.getPackageRegistry().put(grl.kpimodel.KpimodelPackage.eINSTANCE.getNsURI(), grl.kpimodel.KpimodelPackage.eINSTANCE);
         }
+        if (!isInWorkspace(grl.kpimodel.KpimodelPackage.class)) {
+            resourceSet.getPackageRegistry().put(grl.kpimodel.KpimodelPackage.eINSTANCE.getNsURI(), grl.kpimodel.KpimodelPackage.eINSTANCE);
+        }
         if (!isInWorkspace(urn.UrnPackage.class)) {
             resourceSet.getPackageRegistry().put(urn.UrnPackage.eINSTANCE.getNsURI(), urn.UrnPackage.eINSTANCE);
+        }
+        if (!isInWorkspace(urncore.UrncorePackage.class)) {
+            resourceSet.getPackageRegistry().put(urncore.UrncorePackage.eINSTANCE.getNsURI(), urncore.UrncorePackage.eINSTANCE);
         }
         
         /*

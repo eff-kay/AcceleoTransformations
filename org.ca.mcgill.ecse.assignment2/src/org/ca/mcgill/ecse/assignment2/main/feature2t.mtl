@@ -1,25 +1,36 @@
 [comment encoding = UTF-8 /]
-[**
- * The documentation of the module feature2t.
- */]
-[module feature2t('http:///fm.ecore', 'http:///grl.ecore', 'http:///urn.ecore')]
+[module feature2T('http:///fm.ecore', 'http:///grl.ecore', 'http:///urn.ecore')]
 
 
 [**
  * The documentation of the template feature2t.
  * @param anURNspec
  */]
-[template public feature2t(anURNspec : URNspec)]
-[comment @main/]
-[file (anURNspec.name, false, 'UTF-8')]
-[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements)]
-[comment this is the root feature/]
-[if(intElement.linksSrc->isEmpty())]
-features [intElement.name/]{
-} 
 
-[/if]
+[query public getDecomposition(el : IntentionalElement) : String = if el.decompositionType.toString().equalsIgnoreCase('And') then '' else el.decompositionType.toString().toUpper()  endif /]
+[query public getLinkType(linkName : String) : String = if linkName.equalsIgnoreCase('OptionalFMLink') then 'optional' else if linkName.equalsIgnoreCase('MandatoryFMLink') then 'mandatory' else '' endif endif /]
 
-[/for]
+[template public writeChildren(intElement : IntentionalElement, urnSpec : URNspec)]
+	[for (link : ElementLink | intElement.linksDest)]
+		[if (link.src.oclAsType(IntentionalElement).linksDest->isEmpty())]
+		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition() /]
+		[else]
+		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition()/] {
+			[writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]
+		}
+		[/if]
+	[/for]
+[/template]
+
+[template public Feature2Text(anURNspec : URNspec)]
+[file ('features', false, 'UTF-8')]
+	[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements->filter(fm::Feature) )]
+	[comment this is the root feature/]
+	[if(intElement.linksSrc->isEmpty())]
+	feature [intElement.name/]{
+		[writeChildren(intElement, anURNspec)/]
+	}
+	[/if]
+	[/for]
 [/file]
 [/template]

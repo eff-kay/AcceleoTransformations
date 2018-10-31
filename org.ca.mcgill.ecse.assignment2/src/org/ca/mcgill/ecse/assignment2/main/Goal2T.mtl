@@ -1,0 +1,79 @@
+[comment encoding = UTF-8 /]
+[module Goal2T('http:///fm.ecore', 'http:///grl.ecore', 'http:///urn.ecore', 'http:///urncore.ecore')]
+
+
+[query public getDecomposition(intEl : IntentionalElement) : String = if intEl.decompositionType.oclIsUndefined() then '' else intEl.decompositionType.toString()  endif /]
+[query public getIntentionalElement(node: IURNNode) : IntentionalElement = node.oclAsType(grl::IntentionalElementRef)._def.oclAsType(grl::IntentionalElement) /]
+[query public getBelief(node: IURNNode) : Belief = node.oclAsType(grl::Belief)/]
+[query public getBeliefName(belief: Belief) : String = belief.description /]
+
+
+[template public Goal2Text(anURNspec : URNspec)]
+[file ('goals', false, 'UTF-8')]
+[comment We can get actors in the given urn spec by naviagting through grlspec class /]
+[for (actor :  Actor | anURNspec.grlspec.actors)]
+[comment actor name /]
+actor [actor.name/]{
+[comment an actor has containment references /]
+[for (contReference : IURNContainerRef | actor.contRefs)]
+[comment A containment has many nodes. Each node may be a reference to an intenatinal element such as softgoal, goal etc.. /]
+[for (node: IURNNode | contReference.nodes)]
+[comment Initialize an intentional element /]
+[let ie: IntentionalElement = node.oclAsType(grl::IntentionalElementRef)._def.oclAsType(grl::IntentionalElement)]
+[comment proess softgoal or goal /]
+[if (ie.type.toString().equalsIgnoreCase('Softgoal')) or 
+		(ie.type.toString().equalsIgnoreCase('Goal')) or
+		(ie.type.toString().equalsIgnoreCase('Task')) or
+		(ie.type.toString().equalsIgnoreCase('Ressource'))
+	]
+	[if (ie.eClass().name.equalsIgnoreCase('Feature'))]
+	feature [ie.name/]{
+	[comment need to do this because there is a typo in urn spec. Note the double 's' in Ressource /]
+	
+	[else] [if (ie.type.toString().equalsIgnoreCase('Ressource'))]
+	resource [ie.name/]{
+	[else]
+	[ie.type.toString().toLowerFirst()/] [ie.name/]{
+	[/if]
+	[/if]
+	[if not (ie.refs->isEmpty())]
+		[for (link: IntentionalElementRef | ie.refs)]
+				[for (pred: IURNConnection | link.pred)]
+					[ if not (pred.source.oclAsType(grl::Belief).oclIsInvalid())]
+		[pred.source.oclAsType(grl::Belief).description/]
+					[/if ]
+			[/for]
+		[/for]
+	[/if]
+	[if (ie.importanceQuantitative = 0)]
+	[else]
+		importance [ie.importanceQuantitative/]
+	[/if]
+	[if not (ie.linksSrc->isEmpty())]
+		[for (link: ElementLink | ie.linksSrc)]
+		[if (link.eClass().name.equalsIgnoreCase('Decomposition'))]
+		[link.oclAsType(grl::Decomposition).dest.oclAsType(IntentionalElement).decompositionType.toString().toLowerFirst()/] decomposes [link.oclAsType(grl::Decomposition).dest.oclAsType(IntentionalElement).name/]
+		[/if]
+		[if (link.eClass().name.equalsIgnoreCase('Contribution'))]
+		contributesTo [link.dest.name/] [if (link.oclAsType(grl::Contribution).correlation)]correlation [/if]with [link.oclAsType(grl::Contribution).quantitativeContribution/]
+		[/if]
+		[/for]
+	[/if]
+	[if not (ie.linksDest->isEmpty())]
+		[for (link: ElementLink | ie.linksDest)]
+		[if (link.eClass().name.equalsIgnoreCase('Dependency'))]
+		dependsOn [link.src.oclAsType(IntentionalElement).refs.contRef.contDef.oclAsType(Actor).name/].[link.src.name/]
+		[/if]
+		[/for]
+	[/if]
+	}
+[/if]
+[/let]
+[/for]
+}
+
+[/for]
+[/for]
+
+[/file]
+[/template]
