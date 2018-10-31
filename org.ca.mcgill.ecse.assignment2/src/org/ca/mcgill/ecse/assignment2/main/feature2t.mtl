@@ -13,11 +13,10 @@
 [template public writeChildren(intElement : IntentionalElement, urnSpec : URNspec)]
 	[for (link : ElementLink | intElement.linksDest)]
 		[if (link.src.oclAsType(IntentionalElement).linksDest->isEmpty())]
-		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition() /]
+  [link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition() /]
 		[else]
-		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition()/] {
-			[writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]
-		}
+  [link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition()/] {
+    [writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]}
 		[/if]
 	[/for]
 [/template]
@@ -27,9 +26,9 @@
 	[for (intElement :  IntentionalElement | anURNspec.grlspec.intElements->filter(fm::Feature) )]
 	[comment this is the root feature/]
 	[if(intElement.linksSrc->isEmpty())]
-	feature [intElement.name/]{
-		[writeChildren(intElement, anURNspec)/]
-	}
+feature [intElement.name/]{
+  [writeChildren(intElement, anURNspec)/]
+  }
 	[/if]
 	[/for]
 [/file]
