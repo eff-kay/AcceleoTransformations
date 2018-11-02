@@ -8,23 +8,18 @@
 [query public getBeliefName(belief: Belief) : String = belief.description /]
 
 
-[template public Goal2Text(anURNspec : URNspec)
-{
-	;
-}]
+[template public Goal2Text(anURNspec : URNspec)]
 [file ('goals', false, 'UTF-8')]
 [comment identify actors if any in the given URN spec and transform /]
-
 [for (a :  Actor | anURNspec.grlspec.actors)]
 [comment output actor name /]
 actor [a.name/]{
 [comment get all nodes of an actor /]
 [for (cr : IURNContainerRef | a.contRefs)]
 [for (node: IURNNode | cr.nodes)]
-
 [comment node.oclAsType(grl::IntentionalElementRef).name/]
+[if not node.oclAsType(grl::IntentionalElementRef).oclIsInvalid()]
 [let ie: IntentionalElement = node.oclAsType(grl::IntentionalElementRef)._def.oclAsType(grl::IntentionalElement)]
-
 [if (ie.type.toString().equalsIgnoreCase('Softgoal'))]
 	softgoal [ie.name/] {
 	[if (ie.importanceQuantitative = 0)]
@@ -133,7 +128,7 @@ actor [a.name/]{
 	[if not (ie.linksSrc->isEmpty())]
 		[for (link: ElementLink | ie.linksSrc)]
 		[if (link.eClass().name.equalsIgnoreCase('Decomposition'))]
-		[link.oclAsType(grl::Decomposition).dest.oclAsType(IntentionalElement).decompositionType/] decomposes [link.oclAsType(grl::Decomposition).dest.oclAsType(IntentionalElement).name/]
+		[link.oclAsType(grl::Decomposition).dest.oclAsType(IntentionalElement).decompositionType.toString().toLowerFirst()/] decomposes [link.oclAsType(grl::Decomposition).dest.oclAsType(IntentionalElement).name/]
 		[/if]
 		[if (link.eClass().name.equalsIgnoreCase('Contribution'))]
 		contributesTo [link.dest.name/] [if (link.oclAsType(grl::Contribution).correlation)]correlation[/if] with [link.oclAsType(grl::Contribution).quantitativeContribution/]
@@ -150,11 +145,12 @@ actor [a.name/]{
 	}
 [/if]
 [/let]
+[comment]check for belief element [/comment]
+[/if]
+
 [/for]
 }
-
 [/for]
 [/for]
-
 [/file]
 [/template]
