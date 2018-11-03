@@ -9,7 +9,7 @@
 
 
 [template public Goal2Text(anURNspec : URNspec)]
-[file ('goals1', false, 'UTF-8')]
+[file ('goals', false, 'UTF-8')]
 [comment We can get actors in the given urn spec by naviagting through grlspec class /]
 [for (actor :  Actor | anURNspec.grlspec.actors)]
 [comment actor name /]
