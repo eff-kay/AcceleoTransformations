@@ -8,7 +8,7 @@
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
-package testAcceleo1;
+package org.ca.mcgill.ecse.assignment2;
 
 import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
@@ -21,7 +21,7 @@ public class Activator extends Plugin {
     /**
      * The plug-in ID.
      */
-    public static final String PLUGIN_ID = "testAcceleo1";
+    public static final String PLUGIN_ID = "org.ca.mcgill.ecse.assignment2";
 
     /**
      * The shared instance.

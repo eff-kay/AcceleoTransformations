@@ -13,11 +13,11 @@
 [template public writeChildren(intElement : IntentionalElement, urnSpec : URNspec)]
 	[for (link : ElementLink | intElement.linksDest)]
 		[if (link.src.oclAsType(IntentionalElement).linksDest->isEmpty())]
-		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition() /]
+[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition() /]
 		[else]
-		[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition()/] {
-			[writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]
-		}
+[link.eClass().name.getLinkType()/] [link.src.name/] [link.src.oclAsType(IntentionalElement).getDecomposition()/] {
+	[writeChildren(link.src.oclAsType(IntentionalElement), urnSpec)/]
+}
 		[/if]
 	[/for]
 [/template]

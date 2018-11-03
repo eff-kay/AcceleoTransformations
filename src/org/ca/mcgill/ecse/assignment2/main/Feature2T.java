@@ -1,4 +1,3 @@
-package testAcceleo1.main;
 /*******************************************************************************
  * Copyright (c) 2008, 2012 Obeo.
  * All rights reserved. This program and the accompanying materials
@@ -9,6 +8,7 @@ package testAcceleo1.main;
  * Contributors:
  *     Obeo - initial API and implementation
  *******************************************************************************/
+package org.ca.mcgill.ecse.assignment2.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,24 +25,24 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 /**
- * Entry point of the 'Goal2T' generation module.
+ * Entry point of the 'Feature2T' generation module.
  *
  * @generated
  */
-public class Goal2T extends AbstractAcceleoGenerator {
+public class Feature2T extends AbstractAcceleoGenerator {
     /**
      * The name of the module.
      *
      * @generated
      */
-    public static final String MODULE_FILE_NAME = "/testAcceleo1/main/Goal2T";
+    public static final String MODULE_FILE_NAME = "/org.ca.mcgill.ecse.assignment2/main/feature2T";
     
     /**
      * The name of the templates that are to be generated.
      *
      * @generated
      */
-    public static final String[] TEMPLATE_NAMES = { "Goal2Text" };
+    public static final String[] TEMPLATE_NAMES = { "Feature2Text" };
     
     /**
      * The list of properties files from the launch parameters (Launch configuration).
@@ -65,7 +65,7 @@ public class Goal2T extends AbstractAcceleoGenerator {
      *
      * @generated
      */
-    public Goal2T() {
+    public Feature2T() {
         // Empty implementation
     }
 
@@ -85,7 +85,7 @@ public class Goal2T extends AbstractAcceleoGenerator {
      *             the model cannot be loaded.
      * @generated
      */
-    public Goal2T(URI modelURI, File targetFolder,
+    public Feature2T(URI modelURI, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(modelURI, targetFolder, arguments);
     }
@@ -106,7 +106,7 @@ public class Goal2T extends AbstractAcceleoGenerator {
      *             This can be thrown in two scenarios : the module cannot be found, or it cannot be loaded.
      * @generated
      */
-    public Goal2T(EObject model, File targetFolder,
+    public Feature2T(EObject model, File targetFolder,
             List<? extends Object> arguments) throws IOException {
         initialize(model, targetFolder, arguments);
     }
@@ -141,7 +141,7 @@ public class Goal2T extends AbstractAcceleoGenerator {
                  * add in "arguments" this "String" attribute.
                  */
                 
-                Goal2T generator = new Goal2T(modelURI, folder, arguments);
+                Feature2T generator = new Feature2T(modelURI, folder, arguments);
                 
                 /*
                  * Add the properties from the launch arguments.
@@ -351,9 +351,6 @@ public class Goal2T extends AbstractAcceleoGenerator {
         }
         if (!isInWorkspace(urn.UrnPackage.class)) {
             resourceSet.getPackageRegistry().put(urn.UrnPackage.eINSTANCE.getNsURI(), urn.UrnPackage.eINSTANCE);
-        }
-        if (!isInWorkspace(urncore.UrncorePackage.class)) {
-            resourceSet.getPackageRegistry().put(urncore.UrncorePackage.eINSTANCE.getNsURI(), urncore.UrncorePackage.eINSTANCE);
         }
         
         /*

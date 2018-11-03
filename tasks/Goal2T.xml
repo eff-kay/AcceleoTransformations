@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="Goal2T" name="testAcceleo1">
+<project default="Goal2T" name="org.ca.mcgill.ecse.assignment2">
     <property name="ECLIPSE_HOME" value="../../../../../../../Applications/Eclipse.app/Contents/Eclipse"/>
     <property name="ECLIPSE_WORKSPACE" value="../.."/>
 
     <!-- The classpath with only the dependencies used by the project -->
-    <path id="testAcceleo1.libraryclasspath">
-        <pathelement location="${ECLIPSE_WORKSPACE}/testAcceleo1/bin"/>
+    <path id="org.ca.mcgill.ecse.assignment2.libraryclasspath">
+        <pathelement location="${ECLIPSE_WORKSPACE}/org.ca.mcgill.ecse.assignment2/bin"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.core.runtime_3.14.0.v20180417-0825.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/javax.inject_1.0.0.v20091030.jar"/>
         <pathelement location="${ECLIPSE_HOME}/plugins/org.eclipse.osgi_3.13.0.v20180409-1500.jar"/>
@@ -41,23 +41,23 @@
         <pathelement location="${ECLIPSE_HOME}/plugins/com.google.guava_21.0.0.v20170206-1425.jar"/>
     </path>
 
-    <path id="testAcceleo1.classpath">
-        <path refid="testAcceleo1.libraryclasspath"/>
+    <path id="org.ca.mcgill.ecse.assignment2.classpath">
+        <path refid="org.ca.mcgill.ecse.assignment2.libraryclasspath"/>
     </path>
 
     <!-- The classpath with only the jars available in the plugin folder of Eclipse -->
-    <path id="testAcceleo1.libraryclasspath.alljars">
-        <pathelement location="../testAcceleo1/bin"/>
+    <path id="org.ca.mcgill.ecse.assignment2.libraryclasspath.alljars">
+        <pathelement location="../org.ca.mcgill.ecse.assignment2/bin"/>
         <fileset dir="${ECLIPSE_HOME}/plugins/" includes="*.jar"/>
     </path>
 
-    <path id="testAcceleo1.classpath.alljars">
-        <path refid="testAcceleo1.libraryclasspath.alljars"/>
+    <path id="org.ca.mcgill.ecse.assignment2.classpath.alljars">
+        <path refid="org.ca.mcgill.ecse.assignment2.libraryclasspath.alljars"/>
     </path>
 
     <!-- The default task with the jars used by this project -->
     <target name="Goal2T">
-        <java classname="testAcceleo1.main.Goal2T" classpathref="testAcceleo1.classpath">
+        <java classname="org.ca.mcgill.ecse.assignment2.main.Goal2T" classpathref="org.ca.mcgill.ecse.assignment2.classpath">
             <arg value="${model}"/>
             <arg value="${target}"/>
         </java>
@@ -68,7 +68,7 @@
         Keep in mind that having two versions of the same jar can create problems
     -->
     <target name="Goal2T.alljars">
-        <java classname="testAcceleo1.main.Goal2T" classpathref="testAcceleo1.classpath">
+        <java classname="org.ca.mcgill.ecse.assignment2.main.Goal2T" classpathref="org.ca.mcgill.ecse.assignment2.classpath">
             <arg value="${model}"/>
             <arg value="${target}"/>
         </java>
